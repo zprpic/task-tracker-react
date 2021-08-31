@@ -9,6 +9,15 @@
 - Goal: group by features or route
 
 - a) assets (icons for isCompleted task prop)
-- b) components (reusable stateless components)
-- c) pages (for router: main and about page)
-- d) hooks (self-explanatory)
+- b) layout (self-explanatory)
+- c) components (self-explanatory)
+- d) pages (for router: main and about page)
+- e) hooks (self-explanatory)
+- f) services (axios requests)
+- g) styles (css...)
+
+### 2. Create basic layout
+
+- Header (header + add task/sort tasks)
+- Main (render list)
+- Footer (pagination)

@@ -1,10 +1,11 @@
 import React from "react";
+import Header from "../components/header/Header";
 
 const Main = () => {
   return (
-    <section>
-      <div>here goes list</div>
-    </section>
+    <>
+      <Header />
+    </>
   );
 };
 

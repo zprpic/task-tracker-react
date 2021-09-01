@@ -1,9 +1,12 @@
 import React from "react";
+import Heading from "./heading/Heading";
+import Nav from "./nav/Nav";
 
 const Header = () => {
   return (
     <header>
-      <h1>Task Tracker</h1>
+      <Heading />
+      <Nav />
     </header>
   );
 };

@@ -6,14 +6,16 @@ import { Task } from "../components/Task";
 
 export const TaskPage = () => {
   const { id } = useParams();
-  const { isLoadingData, errorLoadingData, data } = useFetch(
-    APIRoutes.getTasks(id)
-  );
+  const {
+    isLoadingData,
+    errorLoadingData,
+    data: task,
+  } = useFetch(APIRoutes.getTask(id));
 
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Task</h1>
-      {/* {isLoadingData ? "Loading data..." : <Task item={item} />} */}
+      {isLoadingData ? "Loading data..." : <Task task={task} />}
     </div>
   );
 };

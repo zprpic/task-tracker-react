@@ -1,18 +1,31 @@
 import React from "react";
-import Header from "./components/Header";
-import Dashboard from "./components/Dashboard";
-import List from "./components/List";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { HomePage, TasksPage, TaskPage, AboutPage, ErrorPage } from "./pages";
 import "./styles/index.css";
-import Pagination from "./components/Pagination";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Dashboard />
-      <List />
-      <Pagination />
-    </>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/tasks">
+          <TasksPage />
+        </Route>
+        <Route exact path="/task/:id">
+          <TaskPage />
+        </Route>
+        <Route exact path="/about">
+          <AboutPage />
+        </Route>
+        <Route path="*">
+          <ErrorPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

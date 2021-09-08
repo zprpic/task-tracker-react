@@ -8,10 +8,13 @@
 
 - Goal: group by features or route
 
-- services (axios...)
+- services (fetch)
 - components (stateless components)
 - assets (icons...)
 - hooks
 - pages (tasks, task, about)
 
-### 2. Create basic layout
+### 2. Create pages
+
+- install react-router-dom
+- create and route pages: (TasksPage, TaskPage, AboutPage)

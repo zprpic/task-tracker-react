@@ -5,7 +5,7 @@ export const Button = (props) => {
   const { id } = props;
   return (
     <button>
-      <Link to={`/task/${id}`}>Edit...</Link>
+      <Link to={`/tasks/${id}`}>Edit...</Link>
     </button>
   );
 };

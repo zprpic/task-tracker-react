@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/tasks">
           <TasksPage />
         </Route>
-        <Route exact path="/task/:id">
+        <Route exact path="/tasks/:id">
           <TaskPage />
         </Route>
         <Route exact path="/about">

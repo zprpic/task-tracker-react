@@ -1,5 +1,5 @@
-import React from "react";
 import { useState, useEffect } from "react";
+import { fetchJSON } from "../helpers/fetchJSON";
 
 export const useFetch = (url) => {
   const [isLoadingData, setIsLoadingData] = useState(true);
@@ -9,8 +9,7 @@ export const useFetch = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const data = await fetchJSON(url);
         setData(data);
       } catch (error) {
         setErrorLoadingData(error);

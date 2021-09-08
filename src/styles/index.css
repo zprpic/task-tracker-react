@@ -12,3 +12,11 @@
   display: grid;
   place-items: center;
 }
+
+.taskName {
+  text-decoration: none;
+}
+
+.taskNameCompleted {
+  text-decoration: line-through;
+}

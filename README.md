@@ -19,3 +19,5 @@
 - install react-router-dom
 - create and route pages: (TasksPage, TaskPage, AboutPage, ErrorPage) in App.js
 - create a navbar component to navigate between pages
+
+### 3. Create TaskList and Task components

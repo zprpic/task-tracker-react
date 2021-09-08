@@ -1,5 +1,9 @@
 import React from "react";
 
 export const AboutPage = () => {
-  return <div>about page</div>;
+  return (
+    <div className="pageContainer">
+      <h1 className="pageTitle">About</h1>
+    </div>
+  );
 };

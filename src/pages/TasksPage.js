@@ -7,15 +7,17 @@ import { Input } from "../components/Input";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
-  const { get, post, response, loading, error } = useFetch(APIRoutes.route);
+  const { get, post, del, response, loading, error } = useFetch(
+    APIRoutes.route
+  );
 
-  const loadInitialTasks = async () => {
-    const initialTasks = await get("/tasks");
-    if (response.ok) setTasks(initialTasks);
+  const loadTasks = async () => {
+    const tasks = await get("/tasks");
+    if (response.ok) setTasks(tasks);
   };
 
   useEffect(() => {
-    loadInitialTasks();
+    loadTasks();
   }, []);
 
   const createTask = async (task) => {
@@ -23,11 +25,20 @@ export const TasksPage = () => {
     if (response.ok) setTasks([...tasks, newTask]);
   };
 
+  const deleteTask = async (id) => {
+    await del("/tasks/" + id);
+    if (response.ok) console("? XD");
+  };
+
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Tasks</h1>
       <Input createTask={createTask} />
-      {loading ? <h3>Loading data...</h3> : <TaskList tasks={tasks} />}
+      {loading ? (
+        <h3>Loading data...</h3>
+      ) : (
+        <TaskList tasks={tasks} deleteTask={deleteTask} />
+      )}
     </div>
   );
 };

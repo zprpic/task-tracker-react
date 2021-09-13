@@ -10,6 +10,7 @@ export const Input = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createTask(task);
+    e.target.reset();
   };
   return (
     <form onSubmit={(e, task) => handleSubmit(e, task)}>

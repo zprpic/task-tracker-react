@@ -1,18 +1,33 @@
 import React from "react";
-import { useFetch } from "../hooks/useFetch";
+import { useState, useEffect } from "react";
+import useFetch from "use-http";
 import { APIRoutes } from "../config/APIRoutes";
 import { TaskList } from "../components/TaskList";
+import { Input } from "../components/Input";
 
 export const TasksPage = () => {
-  const {
-    isLoadingData,
-    errorLoadingData,
-    data: tasks,
-  } = useFetch(APIRoutes.getTasks());
+  const [tasks, setTasks] = useState([]);
+  const { get, post, response, loading, error } = useFetch(APIRoutes.route);
+
+  const loadInitialTasks = async () => {
+    const initialTasks = await get("/tasks");
+    if (response.ok) setTasks(initialTasks);
+  };
+
+  useEffect(() => {
+    loadInitialTasks();
+  }, []);
+
+  const createTask = async (task) => {
+    const newTask = await post("/tasks", { name: task });
+    if (response.ok) setTasks([...tasks, newTask]);
+  };
+
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Tasks</h1>
-      {isLoadingData ? <h3>Loading data...</h3> : <TaskList tasks={tasks} />}
+      <Input createTask={createTask} />
+      {loading ? <h3>Loading data...</h3> : <TaskList tasks={tasks} />}
     </div>
   );
 };

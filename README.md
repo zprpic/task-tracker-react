@@ -21,3 +21,7 @@
 - create a navbar component to navigate between pages
 
 ### 3. Create TaskList and Task components
+
+### 4. Install custom useFetch hook and create getAllTasks, getSpecific-, Create-, Update-, Delete- task hooks
+
+- from: https://use-http.com/#/

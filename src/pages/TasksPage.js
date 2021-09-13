@@ -4,6 +4,7 @@ import useFetch from "use-http";
 import { APIRoutes } from "../config/APIRoutes";
 import { TaskList } from "../components/TaskList";
 import { Input } from "../components/Input";
+import { renderTypeLoader } from "../helpers/renderTypeLoader";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,7 +28,7 @@ export const TasksPage = () => {
 
   const deleteTask = async (id) => {
     await del("/tasks/" + id);
-    if (response.ok) console("? XD");
+    if (response.ok) setTasks(tasks.filter((task) => task._id !== id));
   };
 
   return (
@@ -37,7 +38,11 @@ export const TasksPage = () => {
       {loading ? (
         <h3>Loading data...</h3>
       ) : (
-        <TaskList tasks={tasks} deleteTask={deleteTask} />
+        <TaskList
+          tasks={tasks}
+          deleteTask={deleteTask}
+          renderType={renderTypeLoader.renderList()}
+        />
       )}
     </div>
   );

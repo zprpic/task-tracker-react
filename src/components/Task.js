@@ -1,20 +1,32 @@
 import React from "react";
-import useFetch from "use-http";
-import { APIRoutes } from "../config/APIRoutes";
 import { Button } from "./Button";
+import { ReactComponent as DeleteIcon } from "../assets/delete.svg";
+import { ReactComponent as EditIcon } from "../assets/edit.svg";
 
 export const Task = (props) => {
   const { _id, name, isCompleted } = props.task;
-  const { deleteTask } = props;
+  const { renderType, deleteTask } = props;
 
   return (
     <li>
-      <span className={isCompleted ? "taskNameCompleted" : "taskName"}>
-        {name}
-      </span>
-      <Button id={_id} />
-      <button onClick={() => deleteTask(_id)}>delete</button>
-      {_id}
+      {renderType === "LIST" && (
+        <>
+          <span className={isCompleted ? "taskNameCompleted" : "taskName"}>
+            {name}
+          </span>
+          <Button id={_id} />
+          <button onClick={() => deleteTask(_id)}>
+            <DeleteIcon />
+          </button>
+        </>
+      )}
+
+      {renderType === "SINGLE" && (
+        <>
+          <input type="text" value={name} />
+          <button>Save</button>
+        </>
+      )}
     </li>
   );
 };

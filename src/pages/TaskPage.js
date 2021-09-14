@@ -9,7 +9,7 @@ import { renderTypeLoader } from "../helpers/renderTypeLoader";
 export const TaskPage = () => {
   const [task, setTask] = useState({});
   const { id } = useParams();
-  const { get, response, loading, error } = useFetch(APIRoutes.route);
+  const { get, patch, response, loading, error } = useFetch(APIRoutes.route);
 
   const loadTask = async (id) => {
     const initialTask = await get("/tasks/" + id);
@@ -20,13 +20,25 @@ export const TaskPage = () => {
     loadTask(id);
   }, []);
 
+  const updateTask = async (task) => {
+    const { task: name, completed: isCompleted, id } = task;
+    await patch("/tasks/" + id, {
+      name,
+      isCompleted,
+    });
+  };
+
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Task</h1>
       {loading ? (
         "Loading data..."
       ) : (
-        <Task task={task} renderType={renderTypeLoader.renderSingle()} />
+        <Task
+          task={task}
+          updateTask={updateTask}
+          renderType={renderTypeLoader.renderSingle()}
+        />
       )}
     </div>
   );

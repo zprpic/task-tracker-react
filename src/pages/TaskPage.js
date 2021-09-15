@@ -26,6 +26,7 @@ export const TaskPage = () => {
       name,
       isCompleted,
     });
+    if (response.ok) setTask(task);
   };
 
   return (

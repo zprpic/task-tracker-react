@@ -12,14 +12,11 @@ export const TasksPage = () => {
     APIRoutes.route
   );
 
-  const loadTasks = async () => {
-    const tasks = await get("/tasks");
-    if (response.ok) setTasks(tasks);
+  const loadInitialTasks = async () => {
+    const initialTasks = await get("/tasks");
+    if (response.ok) setTasks(initialTasks);
+    console.log("load initial tasks");
   };
-
-  useEffect(() => {
-    loadTasks();
-  }, []);
 
   const createTask = async (task) => {
     const newTask = await post("/tasks", { name: task });
@@ -28,8 +25,14 @@ export const TasksPage = () => {
 
   const deleteTask = async (id) => {
     await del("/tasks/" + id);
-    if (response.ok) setTasks(tasks.filter((task) => task._id !== id));
+    if (response.ok)
+      setTasks((tasks) => tasks.filter((task) => task._id !== id));
   };
+
+  useEffect(() => {
+    loadInitialTasks();
+    console.log("use effect triggered");
+  }, []);
 
   return (
     <div className="pageContainer">

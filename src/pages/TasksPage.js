@@ -7,18 +7,17 @@ import { Input } from "../components/Input";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
 
 export const TasksPage = () => {
-  const [task, setTask] = useState(null);
-
-  //NOT INSTA CALLED
+  const [tasks, setTasks] = useState(null);
   const {
     loading,
     error,
-    data: tasks,
+    data,
     fetchRequest: getTasks,
   } = useFetch(APIRoutes.getTasks(), {}, false);
 
   useEffect(() => {
     getTasks();
+    setTasks(data);
   }, []);
 
   /*   const { fetchRequest: createTask } = useFetch(
@@ -36,7 +35,9 @@ export const TasksPage = () => {
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Tasks</h1>
+
       <Input />
+
       {loading && <h3>Loading data...</h3>}
 
       {!loading && error && <h3>error</h3>}

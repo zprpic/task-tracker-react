@@ -7,29 +7,24 @@ import { useState, useEffect } from "react";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
 
 export const TaskPage = () => {
-  const [task, setTask] = useState(null);
   const { id } = useParams();
 
   const {
     loading,
     error,
-    data,
+    data: task,
     fetchRequest: getTask,
   } = useFetch(APIRoutes.getTask(id), {}, false);
 
   useEffect(() => {
     getTask(id);
-    setTask(data);
   }, []);
-
-  console.log(task);
 
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Task</h1>
-      {loading ? (
-        "Loading data..."
-      ) : (
+      {loading && "Loading data..."}
+      {!loading && !error && task && (
         <Task task={task} renderType={renderTypeLoader.renderSingle()} />
       )}
     </div>

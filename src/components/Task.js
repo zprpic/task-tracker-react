@@ -8,8 +8,6 @@ export const Task = (props) => {
   const { _id, name, isCompleted } = props.task;
   const { renderType } = props;
 
-  console.log(props.task);
-
   return (
     <li>
       {renderType === "LIST" && props.task && (

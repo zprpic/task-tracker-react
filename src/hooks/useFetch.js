@@ -12,6 +12,7 @@ export const useFetch = (url, options, watch = []) => {
       const response = await fetch(url, options);
       const data = await response.json();
       setData(data);
+      return data;
     } catch (error) {
       setError(error);
     } finally {

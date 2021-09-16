@@ -10,16 +10,16 @@ export const TaskPage = () => {
   const [task, setTask] = useState({});
   const { id } = useParams();
 
-  useFetch(APIRoutes.route, id);
+  const { loading, error, data } = useFetch(APIRoutes.getTask(id));
 
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Task</h1>
-      {/*       {loading ? (
+      {loading ? (
         "Loading data..."
       ) : (
         <Task task={task} renderType={renderTypeLoader.renderSingle()} />
-      )} */}
+      )}
     </div>
   );
 };

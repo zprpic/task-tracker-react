@@ -7,30 +7,32 @@ import { Input } from "../components/Input";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
 
 export const TasksPage = () => {
-  const [tasks, setTasks] = useState(null);
   const {
     loading,
     error,
-    data,
+    data: tasks,
     fetchRequest: getTasks,
   } = useFetch(APIRoutes.getTasks(), {}, false);
 
   useEffect(() => {
     getTasks();
-    setTasks(data);
   }, []);
 
-  /*   const { fetchRequest: createTask } = useFetch(
+  const { fetchRequest: createTask } = useFetch(
     APIRoutes.createTask(),
     {
       method: "POST",
-      body: JSON.stringify({
-        name: task,
-      }),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
     },
     false
-  ); */
+  );
+
+  useEffect(() => {
+    createTask(APIRoutes.createTask(), { task }, false);
+  }, []);
 
   return (
     <div className="pageContainer">

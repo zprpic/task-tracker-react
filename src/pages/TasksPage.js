@@ -7,22 +7,31 @@ import { Input } from "../components/Input";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
 
 export const TasksPage = () => {
-  //const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState(null);
 
+  //NOT INSTA CALLED
   const {
     loading,
     error,
     data: tasks,
-    fetchRequest,
+    fetchRequest: getTasks,
   } = useFetch(APIRoutes.getTasks(), {}, false);
 
-  /*   const { fetchRequest: createTask } = useFetch(APIRoutes.getTasks(), {
-    method: "POST",
-  }); */
-
   useEffect(() => {
-    fetchRequest();
+    getTasks();
   }, []);
+
+  /*   const { fetchRequest: createTask } = useFetch(
+    APIRoutes.createTask(),
+    {
+      method: "POST",
+      body: JSON.stringify({
+        name: task,
+      }),
+      headers: { "Content-Type": "application/json" },
+    },
+    false
+  ); */
 
   return (
     <div className="pageContainer">

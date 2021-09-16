@@ -1,9 +1,12 @@
 export const APIRoutes = {
-  route: "http://localhost:5000",
+  base_URL: "http://localhost:5000",
   getTasks() {
-    return this.route + "/tasks";
+    return this.base_URL + "/tasks";
   },
   getTask(id) {
-    return this.route + "/tasks" + "/" + id;
+    return this.base_URL + "/tasks" + "/" + id;
+  },
+  createTask() {
+    return this.base_URL + "/tasks";
   },
 };

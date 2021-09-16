@@ -8,9 +8,11 @@ export const Task = (props) => {
   const { _id, name, isCompleted } = props.task;
   const { renderType } = props;
 
+  console.log(props.task);
+
   return (
     <li>
-      {renderType === "LIST" && (
+      {renderType === "LIST" && props.task && (
         <>
           <span className={isCompleted ? "taskNameCompleted" : "taskName"}>
             {name}
@@ -22,7 +24,7 @@ export const Task = (props) => {
         </>
       )}
 
-      {renderType === "SINGLE" && (
+      {renderType === "SINGLE" && props.task && (
         <>
           <form>
             <input type="text" />

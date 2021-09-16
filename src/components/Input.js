@@ -5,7 +5,7 @@ export const Input = (props) => {
   const [task, setTask] = useState("");
   return (
     <form>
-      <input type="text" />
+      <input type="text" onChange={(e) => setTask(e.target.value)} />
     </form>
   );
 };

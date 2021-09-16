@@ -7,13 +7,14 @@ import { Input } from "../components/Input";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
 
 export const TasksPage = () => {
-  const [tasks, setTasks] = useState([]);
+  //const [tasks, setTasks] = useState([]);
 
-  const { loading, error, data, fetchRequest } = useFetch(
-    APIRoutes.getTasks(),
-    {},
-    false
-  );
+  const {
+    loading,
+    error,
+    data: tasks,
+    fetchRequest,
+  } = useFetch(APIRoutes.getTasks(), {}, false);
 
   /*   const { fetchRequest: createTask } = useFetch(APIRoutes.getTasks(), {
     method: "POST",
@@ -29,7 +30,9 @@ export const TasksPage = () => {
       <Input />
       {loading && <h3>Loading data...</h3>}
 
-      {!loading && !error && (
+      {!loading && error && <h3>error</h3>}
+
+      {!loading && !error && tasks && (
         <TaskList tasks={tasks} renderType={renderTypeLoader.renderList()} />
       )}
     </div>

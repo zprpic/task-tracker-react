@@ -24,7 +24,7 @@ export const Task = (props) => {
 
       {renderType === "SINGLE" && (
         <>
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <form>
             <input type="text" />
             <br />
             <label>completed?</label>

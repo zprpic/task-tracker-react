@@ -25,13 +25,12 @@ export const TasksPage = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(task),
     },
     false
   );
 
   useEffect(() => {
-    createTask(APIRoutes.createTask(), { task }, false);
+    createTask({ body: JSON.stringify(task) });
   }, []);
 
   return (

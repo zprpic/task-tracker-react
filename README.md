@@ -25,3 +25,5 @@
 ### 4. Install custom useFetch hook and create getAllTasks, getSpecific-, Create-, Update-, Delete- task hooks
 
 - from: https://use-http.com/#/ - THIS IS BUGGED
+
+### RE: 4. Install redux and create a store with actions and types

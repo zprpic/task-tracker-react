@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { APIRoutes } from "../config/APIRoutes";
-//import { useFetch } from "../hooks/useFetch";
 import { TaskList } from "../components/TaskList";
 import { Input } from "../components/Input";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
@@ -13,10 +12,11 @@ const TasksPage = ({ tasksData, fetchTasks }) => {
     fetchTasks();
   }, []);
 
+  console.log(tasksData);
+
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Tasks</h1>
-
       <Input />
 
       <TaskList tasks={tasksData} renderType={renderTypeLoader.renderList()} />
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchTasks: () => dispatch(fetchTasks()),
+    fetchTasks: () => dispatch(fetchTasks(APIRoutes.getTasks())),
   };
 };
 

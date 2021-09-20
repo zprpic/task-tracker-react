@@ -5,8 +5,8 @@ export const TaskList = (props) => {
   const { tasks, renderType } = props;
   return (
     <ul>
-      {tasks.map((task) => {
-        return <Task task={task} key={task._id} renderType={renderType} />;
+      {Object.keys(tasks).map((key) => {
+        return <Task task={tasks[key]} key={key} renderType={renderType} />;
       })}
     </ul>
   );

@@ -2,11 +2,12 @@ import {
   FETCH_TASKS_REQUEST,
   FETCH_TASKS_SUCCESS,
   FETCH_TASKS_FAILURE,
+  FETCH_TASK_BY_ID,
 } from "./tasksTypes";
 
 const initialState = {
   loading: false,
-  tasks: [],
+  tasks: {},
   error: "",
 };
 
@@ -30,8 +31,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        tasks: [],
         error: action.payload,
+      };
+    }
+    case FETCH_TASK_BY_ID: {
+      return {
+        ...state,
+        loading: false,
+        payload: state.filter((task) => task.id === action.payload.id),
       };
     }
 

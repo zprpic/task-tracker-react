@@ -5,30 +5,37 @@ import { useParams } from "react-router-dom";
 import { Task } from "../components/Task";
 import { useState, useEffect } from "react";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
+import { connect } from "react-redux";
+import { fetchTasks } from "../redux";
 
-export const TaskPage = () => {
+const TaskPage = ({ fetchTasks, taskData }) => {
   const { id } = useParams();
 
-  /*   const {
-    loading,
-    error,
-    data: task,
-    fetchRequest: getTask,
-  } = useFetch(APIRoutes.getTask(id), {}, false);
-
   useEffect(() => {
-    getTask(id);
-  }, []); */
+    fetchTasks(id);
+    console.log(id);
+    console.log(taskData);
+  }, []);
 
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Task</h1>
-      {/*       {loading && "Loading data..."}
-      {!loading && !error && task && (
-        <Task task={task} renderType={renderTypeLoader.renderSingle()} />
-      )} */}
+
+      <Task task={taskData} renderType={renderTypeLoader.renderSingle()} />
     </div>
   );
 };
 
-export default TaskPage;
+const mapStateToProps = (state) => {
+  return {
+    taskData: state.tasks,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTasks: () => dispatch(fetchTasks(APIRoutes.getTask())),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskPage);

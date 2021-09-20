@@ -9,7 +9,7 @@ import { renderTypeLoader } from "../helpers/renderTypeLoader";
 export const TaskPage = () => {
   const { id } = useParams();
 
-  const {
+  /*   const {
     loading,
     error,
     data: task,
@@ -18,15 +18,15 @@ export const TaskPage = () => {
 
   useEffect(() => {
     getTask(id);
-  }, []);
+  }, []); */
 
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Task</h1>
-      {loading && "Loading data..."}
+      {/*       {loading && "Loading data..."}
       {!loading && !error && task && (
         <Task task={task} renderType={renderTypeLoader.renderSingle()} />
-      )}
+      )} */}
     </div>
   );
 };

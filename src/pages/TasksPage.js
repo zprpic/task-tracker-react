@@ -1,36 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { APIRoutes } from "../config/APIRoutes";
-import { useFetch } from "../hooks/useFetch";
+//import { useFetch } from "../hooks/useFetch";
 import { TaskList } from "../components/TaskList";
 import { Input } from "../components/Input";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
+import { connect } from "react-redux";
+import { fetchTasks } from "../redux";
 
-export const TasksPage = () => {
-  const {
-    loading,
-    error,
-    data: tasks,
-    fetchRequest: getTasks,
-  } = useFetch(APIRoutes.getTasks(), {}, false);
-
+const TasksPage = ({ tasksData, fetchTasks }) => {
   useEffect(() => {
-    getTasks();
-  }, []);
-
-  const { fetchRequest: createTask } = useFetch(
-    APIRoutes.createTask(),
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-    false
-  );
-
-  useEffect(() => {
-    createTask({ body: JSON.stringify(task) });
+    fetchTasks();
   }, []);
 
   return (
@@ -39,15 +19,21 @@ export const TasksPage = () => {
 
       <Input />
 
-      {loading && <h3>Loading data...</h3>}
-
-      {!loading && error && <h3>error</h3>}
-
-      {!loading && !error && tasks && (
-        <TaskList tasks={tasks} renderType={renderTypeLoader.renderList()} />
-      )}
+      <TaskList tasks={tasksData} renderType={renderTypeLoader.renderList()} />
     </div>
   );
 };
 
-export default TasksPage;
+const mapStateToProps = (state) => {
+  return {
+    tasksData: state.tasks,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTasks: () => dispatch(fetchTasks()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);

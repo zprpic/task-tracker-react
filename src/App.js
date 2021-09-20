@@ -1,8 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
-import { HomePage, TasksPage, TaskPage, AboutPage, ErrorPage } from "./pages";
+import { HomePage, TaskPage, AboutPage, ErrorPage } from "./pages";
+import TasksPage from "./pages/TasksPage";
 import "./styles/index.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
@@ -13,7 +16,9 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/tasks">
-          <TasksPage />
+          <Provider store={store}>
+            <TasksPage />
+          </Provider>
         </Route>
         <Route exact path="/tasks/:id">
           <TaskPage />

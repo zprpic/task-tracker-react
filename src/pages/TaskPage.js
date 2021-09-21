@@ -6,13 +6,14 @@ import { Task } from "../components/Task";
 import { useState, useEffect } from "react";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
 import { connect } from "react-redux";
-import { fetchTasks } from "../redux";
+import { fetchTaskById } from "../redux";
 
-const TaskPage = ({ fetchTasks, taskData }) => {
+const TaskPage = ({ fetchTaskById, taskData }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetchTasks(id);
+    fetchTaskById(id);
+    console.log(fetchTaskById(id));
     console.log(id);
     console.log(taskData);
   }, []);
@@ -34,7 +35,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchTasks: () => dispatch(fetchTasks(APIRoutes.getTask())),
+    fetchTaskById: () => dispatch(fetchTaskById()),
   };
 };
 

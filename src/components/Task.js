@@ -3,10 +3,13 @@ import { useState } from "react";
 import { Button } from "./Button";
 import { ReactComponent as DeleteIcon } from "../assets/delete.svg";
 import { ReactComponent as EditIcon } from "../assets/edit.svg";
+import { deleteTaskById } from "../redux";
+import { useDispatch } from "react-redux";
 
 export const Task = (props) => {
   const { _id, name, isCompleted } = props.task;
   const { renderType } = props;
+  const dispatch = useDispatch();
 
   return (
     <li>
@@ -17,7 +20,7 @@ export const Task = (props) => {
           </span>
           <Button id={_id} />
           <button>
-            <DeleteIcon />
+            <DeleteIcon onClick={() => dispatch(deleteTaskById(_id))} />
           </button>
         </>
       )}

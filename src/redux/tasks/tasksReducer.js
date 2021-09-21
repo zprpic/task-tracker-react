@@ -3,6 +3,9 @@ import {
   FETCH_TASKS_SUCCESS,
   FETCH_TASKS_FAILURE,
   FETCH_TASK_BY_ID,
+  DELETE_TASK_BY_ID_REQUEST,
+  DELETE_TASK_BY_ID_SUCCESS,
+  DELETE_TASK_BY_ID_FAILURE,
 } from "./tasksTypes";
 
 const initialState = {
@@ -38,7 +41,30 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        payload: state.filter((task) => task.id === action.payload.id),
+        payload: action.payload,
+      };
+    }
+
+    case DELETE_TASK_BY_ID_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+
+    case DELETE_TASK_BY_ID_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        payload: action.payload,
+      };
+    }
+
+    case DELETE_TASK_BY_ID_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        payload: action.payload,
       };
     }
 

@@ -9,4 +9,7 @@ export const APIRoutes = {
   createTask() {
     return this.base_URL + "/tasks";
   },
+  deleteTask(id) {
+    return this.base_URL + "/tasks" + "/" + id;
+  },
 };

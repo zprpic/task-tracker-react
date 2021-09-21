@@ -12,8 +12,6 @@ const TasksPage = ({ tasksData, fetchTasks }) => {
     fetchTasks();
   }, []);
 
-  console.log(tasksData);
-
   return (
     <div className="pageContainer">
       <h1 className="pageTitle">Tasks</h1>
@@ -32,7 +30,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchTasks: () => dispatch(fetchTasks(APIRoutes.getTasks())),
+    fetchTasks: () => dispatch(fetchTasks()),
   };
 };
 

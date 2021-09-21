@@ -9,6 +9,9 @@ import {
   DELETE_TASK_BY_ID_REQUEST,
   DELETE_TASK_BY_ID_SUCCESS,
   DELETE_TASK_BY_ID_FAILURE,
+  CREATE_TASK_REQUEST,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_FAILURE,
 } from "./tasksTypes";
 
 export const fetchTasksRequest = () => {
@@ -53,7 +56,27 @@ export const deleteTaskByIdSuccess = (id) => {
 
 export const deleteTaskByIdFailure = (error) => {
   return {
-    type: DELETE_TASK_BY_ID_SUCCESS,
+    type: DELETE_TASK_BY_ID_FAILURE,
+    payload: error,
+  };
+};
+
+export const createTaskRequest = () => {
+  return {
+    type: CREATE_TASK_REQUEST,
+  };
+};
+
+export const createTaskSuccess = (task) => {
+  return {
+    type: CREATE_TASK_SUCCESS,
+    payload: task,
+  };
+};
+
+export const createTaskFailure = (error) => {
+  return {
+    type: CREATE_TASK_FAILURE,
     payload: error,
   };
 };
@@ -69,6 +92,23 @@ export const fetchTasks = () => {
       })
       .catch((error) => {
         dispatch(fetchTasksFailure(error.message));
+      });
+  };
+};
+
+export const createTask = (e, task) => {
+  e.preventDefault();
+  return (dispatch) => {
+    dispatch(createTaskRequest());
+    axios
+      .post(APIRoutes.createTask(), { name: task })
+      .then((response) => {
+        const newTask = response.data;
+        dispatch(createTaskSuccess(newTask));
+      })
+      .catch((error) => {
+        console.log(error.message);
+        dispatch(createTaskFailure(error.message));
       });
   };
 };

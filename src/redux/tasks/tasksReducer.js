@@ -6,6 +6,9 @@ import {
   DELETE_TASK_BY_ID_REQUEST,
   DELETE_TASK_BY_ID_SUCCESS,
   DELETE_TASK_BY_ID_FAILURE,
+  CREATE_TASK_REQUEST,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_FAILURE,
 } from "./tasksTypes";
 
 const initialState = {
@@ -66,6 +69,31 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         payload: action.payload,
+      };
+    }
+
+    case CREATE_TASK_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        payload: action.payload,
+      };
+    }
+
+    case CREATE_TASK_SUCCESS: {
+      const { task } = action.payload;
+      return {
+        ...state,
+        //tasks:  update tasks with new task
+        loading: false,
+      };
+    }
+
+    case CREATE_TASK_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     }
 

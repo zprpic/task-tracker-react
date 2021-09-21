@@ -38,17 +38,16 @@ export const fetchTaskById = (id) => {
   };
 };
 
-export const deleteTaskByIdRequest = (id) => {
+export const deleteTaskByIdRequest = () => {
   return {
     type: DELETE_TASK_BY_ID_REQUEST,
-    payload: id,
   };
 };
 
-export const deleteTaskByIdSuccess = (success) => {
+export const deleteTaskByIdSuccess = (id) => {
   return {
     type: DELETE_TASK_BY_ID_SUCCESS,
-    payload: success,
+    payload: id,
   };
 };
 
@@ -76,12 +75,12 @@ export const fetchTasks = () => {
 
 export const deleteTaskById = (id) => {
   return (dispatch) => {
-    dispatch(deleteTaskByIdRequest(id));
+    dispatch(deleteTaskByIdRequest());
     axios
       .delete(APIRoutes.deleteTask(id))
       .then((response) => {
         const taskDeleted = response.data;
-        dispatch(deleteTaskByIdSuccess(taskDeleted));
+        dispatch(deleteTaskByIdSuccess(id));
       })
       .catch((error) => {
         dispatch(deleteTaskByIdFailure(error.message));

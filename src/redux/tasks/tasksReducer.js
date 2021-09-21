@@ -53,10 +53,11 @@ const reducer = (state = initialState, action) => {
     }
 
     case DELETE_TASK_BY_ID_SUCCESS: {
+      const { [action.payload]: deletedTask, ...updatedTasks } = state.tasks;
       return {
         ...state,
         loading: false,
-        payload: action.payload,
+        tasks: updatedTasks,
       };
     }
 

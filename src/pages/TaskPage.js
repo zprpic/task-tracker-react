@@ -13,9 +13,6 @@ const TaskPage = ({ fetchTaskById, taskData }) => {
 
   useEffect(() => {
     fetchTaskById(id);
-    console.log(fetchTaskById(id));
-    console.log(id);
-    console.log(taskData);
   }, []);
 
   return (

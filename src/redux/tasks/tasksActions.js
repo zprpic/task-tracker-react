@@ -107,7 +107,6 @@ export const createTask = (e, task) => {
         dispatch(createTaskSuccess(newTask));
       })
       .catch((error) => {
-        console.log(error.message);
         dispatch(createTaskFailure(error.message));
       });
   };

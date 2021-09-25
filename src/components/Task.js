@@ -8,29 +8,22 @@ import { useDispatch } from "react-redux";
 import { updateTask } from "../redux";
 
 export const Task = (props) => {
-  const { _id, name, isCompleted } = props.task;
+  const { ...task } = props.task;
   const { renderType } = props;
   const dispatch = useDispatch();
 
-  const [task, setTask] = useState(name);
-  const [completed, setCompleted] = useState(isCompleted);
-
-  const [newTask, setNewTask] = useState({
-    name: name,
-    isCompleted: completed,
-    _id: _id,
-  });
+  const [newTask, setNewTask] = useState({ ...task });
 
   return (
     <li>
       {renderType === "LIST" && props.task && (
         <>
-          <span className={isCompleted ? "taskNameCompleted" : "taskName"}>
-            {name}
+          <span className={task.isCompleted ? "taskNameCompleted" : "taskName"}>
+            {task.name}
           </span>
-          <Button id={_id} />
+          <Button id={task._id} />
           <button>
-            <DeleteIcon onClick={() => dispatch(deleteTaskById(_id))} />
+            <DeleteIcon onClick={() => dispatch(deleteTaskById(task._id))} />
           </button>
         </>
       )}
@@ -40,18 +33,20 @@ export const Task = (props) => {
           <form onSubmit={(e) => dispatch(updateTask(e, newTask))}>
             <input
               type="text"
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
+              value={newTask.name}
+              onChange={(e) => setNewTask({ ...newTask, name: e.target.value })}
             />
             <br />
             <label>completed?</label>
             <input
               type="checkbox"
-              checked={completed}
-              onChange={(e) => setCompleted(e.target.checked)}
+              checked={newTask.isCompleted}
+              onChange={(e) =>
+                setNewTask({ ...newTask, isCompleted: e.target.checked })
+              }
             />
             <br />
-            <input type="hidden" value={_id} />
+            <input type="hidden" value={newTask._id} />
             <button>Save</button>
           </form>
         </>

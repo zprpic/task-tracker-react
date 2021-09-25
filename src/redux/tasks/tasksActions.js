@@ -137,11 +137,13 @@ export const createTask = (e, task) => {
 
 export const updateTask = (e, task) => {
   e.preventDefault();
-  console.log(task);
-  /*   return (dispatch) => {
+  return (dispatch) => {
     dispatch(updateTaskRequest());
     axios
-      .patch(APIRoutes.updateTask(id), { name: task })
+      .patch(APIRoutes.updateTask(task._id), {
+        name: task.name,
+        isCompleted: task.isCompleted,
+      })
       .then((response) => {
         const updatedTask = response.data;
         console.log(updatedTask);
@@ -150,7 +152,7 @@ export const updateTask = (e, task) => {
         console.log(error);
         dispatch(updateTaskFailure(error));
       });
-  }; */
+  };
 };
 
 export const deleteTaskById = (id) => {

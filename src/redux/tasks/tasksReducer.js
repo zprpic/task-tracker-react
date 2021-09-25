@@ -9,6 +9,9 @@ import {
   CREATE_TASK_REQUEST,
   CREATE_TASK_SUCCESS,
   CREATE_TASK_FAILURE,
+  UPDATE_TASK_REQUEST,
+  UPDATE_TASK_SUCCESS,
+  UPDATE_TASK_FAILURE,
 } from "./tasksTypes";
 
 const initialState = {
@@ -94,6 +97,36 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    }
+
+    case FETCH_TASK_BY_ID: {
+      const id = action.payload;
+      return {
+        id,
+      };
+    }
+
+    case UPDATE_TASK_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+
+    case UPDATE_TASK_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        payload: action.payload,
+      };
+    }
+
+    case UPDATE_TASK_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        payload: action.payload,
       };
     }
 

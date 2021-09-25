@@ -8,12 +8,10 @@ import { renderTypeLoader } from "../helpers/renderTypeLoader";
 import { connect } from "react-redux";
 import { fetchTaskById } from "../redux";
 
-const TaskPage = ({ fetchTaskById, taskData }) => {
+const TaskPage = ({ fetchTaskById, tasksData }) => {
   const { id } = useParams();
 
-  useEffect(() => {
-    fetchTaskById(id);
-  }, []);
+  let { ...taskData } = tasksData[`${id}`];
 
   return (
     <div className="pageContainer">
@@ -26,13 +24,13 @@ const TaskPage = ({ fetchTaskById, taskData }) => {
 
 const mapStateToProps = (state) => {
   return {
-    taskData: state.tasks,
+    tasksData: state.tasks,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchTaskById: () => dispatch(fetchTaskById()),
+    fetchTaskById: (id) => dispatch(fetchTaskById(id)),
   };
 };
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createTask } from "../redux";
 
-export const Input = (props) => {
+export const Input = () => {
   const [task, setTask] = useState("");
   const dispatch = useDispatch();
 

@@ -12,6 +12,9 @@ import {
   CREATE_TASK_REQUEST,
   CREATE_TASK_SUCCESS,
   CREATE_TASK_FAILURE,
+  UPDATE_TASK_REQUEST,
+  UPDATE_TASK_SUCCESS,
+  UPDATE_TASK_FAILURE,
 } from "./tasksTypes";
 
 export const fetchTasksRequest = () => {
@@ -81,6 +84,26 @@ export const createTaskFailure = (error) => {
   };
 };
 
+export const updateTaskRequest = () => {
+  return {
+    type: UPDATE_TASK_REQUEST,
+  };
+};
+
+export const updateTaskSucess = (task) => {
+  return {
+    type: UPDATE_TASK_SUCCESS,
+    payload: task,
+  };
+};
+
+export const updateTaskFailure = (error) => {
+  return {
+    type: UPDATE_TASK_FAILURE,
+    payload: error,
+  };
+};
+
 export const fetchTasks = () => {
   return (dispatch) => {
     dispatch(fetchTasksRequest());
@@ -110,6 +133,24 @@ export const createTask = (e, task) => {
         dispatch(createTaskFailure(error.message));
       });
   };
+};
+
+export const updateTask = (e, task) => {
+  e.preventDefault();
+  console.log(task);
+  /*   return (dispatch) => {
+    dispatch(updateTaskRequest());
+    axios
+      .patch(APIRoutes.updateTask(id), { name: task })
+      .then((response) => {
+        const updatedTask = response.data;
+        console.log(updatedTask);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(updateTaskFailure(error));
+      });
+  }; */
 };
 
 export const deleteTaskById = (id) => {

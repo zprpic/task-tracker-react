@@ -90,7 +90,7 @@ export const updateTaskRequest = () => {
   };
 };
 
-export const updateTaskSucess = (task) => {
+export const updateTaskSuccess = (task) => {
   return {
     type: UPDATE_TASK_SUCCESS,
     payload: task,
@@ -146,7 +146,7 @@ export const updateTask = (e, task) => {
       })
       .then((response) => {
         const updatedTask = response.data;
-        console.log(updatedTask);
+        dispatch(updateTaskSuccess(updatedTask));
       })
       .catch((error) => {
         console.log(error);

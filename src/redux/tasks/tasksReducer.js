@@ -115,8 +115,11 @@ const reducer = (state = initialState, action) => {
     }
 
     case UPDATE_TASK_SUCCESS: {
+      const { ...task } = action.payload;
+      const id = task._id;
       return {
         ...state,
+        tasks: { ...state.tasks, [`${id}`]: task },
         loading: false,
         payload: action.payload,
       };

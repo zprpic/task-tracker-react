@@ -46,8 +46,7 @@ export const Task = (props) => {
               }
             />
             <br />
-            <input type="hidden" value={newTask._id} />
-            <button>Save</button>
+            <button type="submit">Save</button>
           </form>
         </>
       )}

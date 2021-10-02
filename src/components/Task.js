@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "./Button";
-import { ReactComponent as DeleteIcon } from "../assets/delete.svg";
-import { ReactComponent as EditIcon } from "../assets/edit.svg";
+import { renderTypeLoader } from "../helpers/renderTypeLoader";
 import { deleteTaskById } from "../redux";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../redux";
@@ -21,10 +20,17 @@ export const Task = (props) => {
           <span className={task.isCompleted ? "taskNameCompleted" : "taskName"}>
             {task.name}
           </span>
-          <Button id={task._id} />
-          <button>
+          <Button
+            id={task._id}
+            renderType={renderTypeLoader.renderEditButton()}
+          />
+          <Button
+            id={task._id}
+            renderType={renderTypeLoader.renderDeletebutton()}
+          />
+          {/*           <button>
             <DeleteIcon onClick={() => dispatch(deleteTaskById(task._id))} />
-          </button>
+          </button> */}
         </>
       )}
 

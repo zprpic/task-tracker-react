@@ -5,4 +5,10 @@ export const renderTypeLoader = {
   renderList() {
     return "LIST";
   },
+  renderEditButton() {
+    return "EDIT";
+  },
+  renderDeletebutton() {
+    return "DELETE";
+  },
 };

@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { Button } from "./Button";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
-import { deleteTaskById } from "../redux";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../redux";
 
@@ -28,9 +27,6 @@ export const Task = (props) => {
             id={task._id}
             renderType={renderTypeLoader.renderDeletebutton()}
           />
-          {/*           <button>
-            <DeleteIcon onClick={() => dispatch(deleteTaskById(task._id))} />
-          </button> */}
         </>
       )}
 

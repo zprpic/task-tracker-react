@@ -60,7 +60,7 @@ export const deleteTaskByIdSuccess = (id) => {
 export const deleteTaskByIdFailure = (error) => {
   return {
     type: DELETE_TASK_BY_ID_FAILURE,
-    payload: error,
+    error: error,
   };
 };
 
@@ -80,7 +80,7 @@ export const createTaskSuccess = (task) => {
 export const createTaskFailure = (error) => {
   return {
     type: CREATE_TASK_FAILURE,
-    payload: error,
+    error: error,
   };
 };
 
@@ -100,7 +100,7 @@ export const updateTaskSuccess = (task) => {
 export const updateTaskFailure = (error) => {
   return {
     type: UPDATE_TASK_FAILURE,
-    payload: error,
+    error: error,
   };
 };
 
@@ -149,8 +149,7 @@ export const updateTask = (e, task) => {
         dispatch(updateTaskSuccess(updatedTask));
       })
       .catch((error) => {
-        console.log(error);
-        dispatch(updateTaskFailure(error));
+        dispatch(updateTaskFailure(error.message));
       });
   };
 };

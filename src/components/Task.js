@@ -1,16 +1,26 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import { Button } from "./Button";
 import { renderTypeLoader } from "../helpers/renderTypeLoader";
-import { useDispatch } from "react-redux";
 import { updateTask } from "../redux";
 
 export const Task = (props) => {
-  const { ...task } = props.task;
+  // dvije komponente ...
+
   const { renderType } = props;
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  const [newTask, setNewTask] = useState({ ...task });
+  const [task, setTask] = useState(props.task);
+
+  const handleSubmit = useCallback(
+    async (e) => {
+      const result = await dispatch(updateTask(e, task));
+      if (result) history.push("/tasks");
+    },
+    [task]
+  );
 
   return (
     <li>
@@ -32,19 +42,19 @@ export const Task = (props) => {
 
       {renderType === "SINGLE" && props.task && (
         <>
-          <form onSubmit={(e) => dispatch(updateTask(e, newTask))}>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
-              value={newTask.name}
-              onChange={(e) => setNewTask({ ...newTask, name: e.target.value })}
+              value={task.name}
+              onChange={(e) => setTask({ ...task, name: e.target.value })}
             />
             <br />
             <label>completed?</label>
             <input
               type="checkbox"
-              checked={newTask.isCompleted}
+              checked={task.isCompleted}
               onChange={(e) =>
-                setNewTask({ ...newTask, isCompleted: e.target.checked })
+                setTask({ ...task, isCompleted: e.target.checked })
               }
             />
             <br />

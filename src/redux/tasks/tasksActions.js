@@ -139,7 +139,7 @@ export const updateTask = (e, task) => {
   e.preventDefault();
   return (dispatch) => {
     dispatch(updateTaskRequest());
-    axios
+    return axios
       .patch(APIRoutes.updateTask(task._id), {
         name: task.name,
         isCompleted: task.isCompleted,
@@ -147,8 +147,10 @@ export const updateTask = (e, task) => {
       .then((response) => {
         const updatedTask = response.data;
         dispatch(updateTaskSuccess(updatedTask));
+        return updatedTask;
       })
       .catch((error) => {
+        console.log(error);
         dispatch(updateTaskFailure(error.message));
       });
   };
